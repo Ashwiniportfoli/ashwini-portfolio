@@ -1,0 +1,12 @@
+{
+  "name": "ashwini-portfolio",
+  "version": "1.0.0",
+  "description": "UI Developer portfolio- Projects and samples",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
