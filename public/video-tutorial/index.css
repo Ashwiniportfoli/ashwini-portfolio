@@ -1,5 +1,5 @@
 header{
-    background-image: url("/public/image/tech-background.gif");
+    background-image: url("../image/tech-background.gif");
     background-size: cover;
     height: 400px;
 }
