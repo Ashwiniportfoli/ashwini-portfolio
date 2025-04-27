@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+    <script src="../node_modules/jquery/dist/jquery.js"></script>
+    <title>Document</title>
+    <style type="text/css" media="all">
+       
+      @media screen and (min-width:700px){
+        #imgRoom{
+            display: flex;
+            justify-content: space-around;   
+            align-items: center;  
+        }
+        dd{
+        position: sticky; 
+    }
+    #customer_Detail{
+     position: sticky;
+    }
+}
+header:hover{
+    background-color: black;
+    color: white;
+}           
+    </style>
+     <script type="text/javascript">
+        "use strict";
+        function bodyload(){
+            document.getElementById("d_Room").src= "../../public/images/droom.jpg";
+            document.getElementById("s_Room").src= "../../public/images/sroom.jpg";
+            var ac_Aminities = document.getElementById("a_Aminities");
+            ac_Aminities.src="../../public/images/ac_room.jpg";
+            var l_Aminities = document.getElementById("l_Aminities");
+            l_Aminities.src = "../../public/images/locker_room.jpg";
+        }
+
+        function RegisterClick(){
+            document.getElementById("lblCustomer").innerHTML = document.getElementById("costomer_Name").value;
+            document.getElementById("lblDate").innerHTML = document.getElementById("customer_Date").value;
+            document.getElementById("lblDays").innerHTML = document.getElementById("total_Days").value;
+            document.getElementById("lblPersons").innerHTML = document.getElementById("number_Person").value;
+            document.getElementById("advanceAmount").innerHTML = document.getElementById("advance_Amount").value;
+
+            var r_Name = "";
+            var r_Cost = 0;
+        
+            
+            var d_Room = document.getElementById("delux_Room");
+            var s_Room = document.getElementById("suite_Room");
+            var no_Peson = document.getElementById("number_Person").value;
+            
+            if(d_Room.checked){
+                r_Name = d_Room.value;
+                r_Cost = 2500;
+            }
+            if(s_Room.checked){
+                r_Name = s_Room.value;
+                r_Cost = 4000;
+            }
+            
+            var amiName = "";
+            var amiCost = 0;
+
+            var ac_Aminities = document.getElementById("ac_Aminities");
+            var locker_Aminities = document.getElementById("locker_Aminities");
+            var T_Days = document.getElementById("total_Days").value;
+
+            var total = r_Cost;
+
+            if(ac_Aminities.checked){
+                amiName = ac_Aminities.value;
+                amiCost = 1000;
+                total += amiCost;
+            }
+
+            var amiCost1 = amiCost;
+            if(locker_Aminities.checked){
+                amiName = locker_Aminities.value;
+                amiCost = 300;
+                amiCost1 += amiCost;
+                total +=amiCost;
+            }
+            if(no_Peson>2){
+                no_Peson = no_Peson-2;
+                total += no_Peson*1000;
+            }
+            if(T_Days>1){
+                r_Cost = r_Cost*T_Days;
+                amiCost1 = amiCost1*T_Days;
+                total = r_Cost+ amiCost1+no_Peson*1000;
+            }
+            var a_amt = 0;
+            var ad_amt = document.getElementById("advance_Amount");
+            var b_amt=0;
+            if(ad_amt.value){
+                a_amt = ad_amt.value;
+                if(a_amt>=1000)
+                {
+                    b_amt = total-a_amt;
+
+                }if(a_amt>=total){
+                    b_amt = 0;
+                }
+                if(a_amt>total || a_amt<1000){
+                    alert("alert : need to deposit at least 1000 or more advance amount and can not be more then total amount");
+                }
+            }
+
+            document.getElementById("lblRoom").innerHTML = r_Name;
+            document.getElementById("roomCost").innerHTML = r_Cost;
+            document.getElementById("lblAdon").innerHTML = amiCost;
+            document.getElementById("lblAdon").innerHTML = amiCost1;
+            document.getElementById("lblTotal").innerHTML = total;
+            document.getElementById("balanceAmount").innerHTML = b_amt;
+        }        
+    </script>
+<body onload="bodyload()" class="container">       
+    <header class="border border-black d-flex justify-content-center align-content-center mt-2 p-1  fw-bold position-sticky top-0">
+        Hotel Registration Form
+    </header> 
+        <section>
+            <main>
+                    <div class="border border-black d-flex justify-content-center align-content-center mt-1 p-1 bg-black text-white">
+                        Customer Info
+                    </div>
+                    <div class="border border-black  mt-1 p-1 ">
+                        <div style="margin-left: 20%;" id="customer_Detail">
+                            Customer Name<input class="form-text" name="customerName" id="costomer_Name" style="margin-left: 20%;"><br>
+                            Check-In-Date<input  type="date" class= "form-text" name="customerDate" id="customer_Date" style="margin-left: 25%;"><br>
+                            Total No Of Days<input type="number" class= "form-text" name="totalDays" id="total_Days" style="margin-left: 20%;"><br>
+                            Total Number of Persons<input type="number" class="form-text"name="numberPerson" id="number_Person" style="margin-left: 14%;">
+
+                        </div>
+                    </div>
+                    <div class="border border-black d-flex justify-content-center align-content-center mt-1 p-1 bg-black text-white">
+                        Select Room Type
+                    </div>
+                    <div class="border border-black mt-1 p-1 " >
+                        <figure id="imgRoom">
+                            <span>
+                                <img width="200" height="200" class="border border-1 rounded-4" id="d_Room">
+                            <figcaption class ="d-flex">
+                                <input type="radio" name="roomcheck" value="delux Room" class="form-check form-check-input" id="delux_Room">
+                                <label class="form-label fw-bold">Delux Room</label>
+                            </figcaption>
+                            </span>
+                            <span>
+                                <img width="200" height="200" class="border border-1 rounded-4 " id="s_Room">
+                            <figcaption class="d-flex">
+                                <input type="radio" name="roomcheck" value="suite Room" class="form-check form-check-input" id="suite_Room">
+                                <label class="form-label fw-bold">Suite Room</label>
+                            </figcaption>
+                            </span>
+                        </figure>    
+                    </div>
+                    <div class="border border-black d-flex justify-content-center align-content-center mt-1 p-1 bg-black text-white">
+                        Select Aminities
+                    </div>
+                    <div class="border border-black  mt-1  p-1 " >
+                        <figure id="imgRoom">
+                            <span>
+                                <img width="200" height="200" class="border border-1 rounded-4" id="a_Aminities">
+                            <figcaption class="d-flex">
+                                <input type="checkbox" class="form-check form-check-input" id="ac_Aminities">
+                                <label class="form-label fw-bold">AC</label>
+                            </figcaption>
+                            </span>
+                            <span>
+                                <img width="200" height="200" class="border border-1 rounded-4 " id="l_Aminities">
+                            <figcaption class="d-flex">
+                                <input type="checkbox" class="form-check form-check-input" id="locker_Aminities">
+                                <label class="form-label fw-bold">Locker</label>
+                            </figcaption>
+                            </span>
+                        </figure>    
+                    </div>
+                
+                    <div class="border border-black d-flex justify-content-center align-content-center mt-1 p-1 bg-black text-white">
+                        Advance Amount
+                    </div>
+                    <div class="border border-1 border-black mt-1">
+                        <div class="d-flex justify-content-center align-items-center p-2">
+                            <label class="form-label fw-bold">Advance Amount</label>
+                            <input type="text" class="form form-text ms-1"  id="advance_Amount" value="Advance" name="a_Amount">
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="d-flex justify-content-center align-items-center mt-2">
+                            <button onclick="RegisterClick()" class="btn btn-dark btn-lg p-2 w-25 text-center">Register</button>
+                        </div>
+                    </div>
+
+                <div class="row border border-1 border-dark mt-3 d-flex justify-content-center align-items-center position-relative">
+                <div class="col">
+                    <dl style="margin-left: 100px;">
+                        <dt>Customer Name :</dt>
+                        <dd id="lblCustomer" ></dd>
+                        <dt>Check In Date :</dt>
+                        <dd id="lblDate"></dd>
+                        <dt>Total Days :</dt>
+                        <dd id="lblDays"></dd>
+                        <dt>Number of Persons :</dt>
+                        <dd id="lblPersons"></dd>
+                        <dt>Advance Amount :</dt>
+                        <dd id="advanceAmount"></dd>
+                        <dt>Balaced Amount :</dt>
+                        <dd id="balanceAmount"></dd>
+                    </dl>
+                </div>
+                <dl class="col" >
+                    <dt>Room :</dt>
+                    <dd id="lblRoom"></dd>
+                    <dt>Room cost:</dt>
+                    <dd id="roomCost"></dd>
+                    <dt>Aminities Charges:</dt>
+                    <dd id="lblAdon"></dd>
+                    <dt>Total</dt>
+                    <dd id="lblTotal"></dd>
+                </dl>
+                    <dl class="col">
+                        <dt >Delux Room:</dt>
+                        <dd>&#8377; 2500/-per day</dd>
+                        <dt>Suite Room:</dt>
+                        <dd>&#8377; 4000/-per day</dd>
+                        <dt>Ac charges:</dt>
+                        <dd>&#8377; 1000/-per day</dd>
+                        <dt>locker chareges:</dt>
+                        <dd>&#8377; 300/-per day</dd>
+                        <div>
+                            <span>*Advance is Mandatory</span>
+                        </div>
+                        <div>
+                            <span>Upto 2 people Cost will not change but for every extra person 1000 will be charged on total amount</span>
+                        </div>
+                    </dl>
+                </div>
+            </div>        
+        </main>
+    </section>
+</body>
+</html>
